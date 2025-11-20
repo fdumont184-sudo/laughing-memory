@@ -1,0 +1,5 @@
+#!/bin/bash
+# Quantum Search - Ultra-fast file/folder search with bloat test
+# Usage: qsearch [command] [options]
+
+python3 /workspace/quantum_search.py "$@"
