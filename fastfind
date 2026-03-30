@@ -1,0 +1,33 @@
+#!/bin/bash
+# Fast file/folder search script - "Speed of light" file finder
+# Wrapper for the Python search script
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PYTHON_SCRIPT="$SCRIPT_DIR/fast_file_search.py"
+
+# Check if the Python script exists
+if [[ ! -f "$PYTHON_SCRIPT" ]]; then
+    echo "❌ Error: Python search script not found at $PYTHON_SCRIPT"
+    exit 1
+fi
+
+# Check if a keyword was provided
+if [[ $# -eq 0 ]]; then
+    echo "🚀 FastFind - Lightning Fast File/Folder Search"
+    echo "Usage: $0 <keyword> [options]"
+    echo ""
+    echo "Options:"
+    echo "  -p PATHS      Search in specific paths (space separated)"
+    echo "  -m MAX        Maximum results to return (default: 100)"
+    echo "  --case        Case-sensitive search"
+    echo "  --system      Search in system directories too"
+    echo ""
+    echo "Examples:"
+    echo "  $0 documents              # Find files/folders containing 'documents'"
+    echo "  $0 report -p /home /tmp   # Search in specific paths"
+    echo "  $0 PDF --case             # Case-sensitive search for 'PDF'"
+    exit 1
+fi
+
+# Run the Python script with all arguments
+python3 "$PYTHON_SCRIPT" "$@"
